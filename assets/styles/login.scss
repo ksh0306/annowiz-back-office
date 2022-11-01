@@ -87,6 +87,8 @@
             border: 1px solid $Light-Gray300;
 
             .el-input {
+              height: 100%;
+
               input {
                 padding: 8px 24px 8px 12px;
                 height: 48px;
@@ -108,8 +110,10 @@
                 &:-webkit-autofill:hover,
                 &:-webkit-autofill:focus,
                 &:-webkit-autofill:active {
+                  box-shadow: 0 0 0 30px $Global-White inset !important;
                   -webkit-box-shadow: 0 0 0 30px $Global-White inset !important;
                   -webkit-text-fill-color: $Dark-Gray600;
+                  height: calc(100% - 2px);
                 }
 
                 &[type="text"] {
