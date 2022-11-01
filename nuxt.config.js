@@ -19,6 +19,13 @@ export default {
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [
+      {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css",
+      },
+    ],
   },
   // ,element-theme-dark
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -26,7 +33,8 @@ export default {
   css: [
     "element-ui/lib/theme-chalk/index.css",
     "@/assets/styles/index.scss",
-    "normalize.css/normalize.css",
+    "@/assets/styles/common.scss",
+    "@/assets/styles/normalize.scss",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
