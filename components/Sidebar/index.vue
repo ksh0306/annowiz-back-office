@@ -50,7 +50,7 @@
             >
           </span>
         </el-menu-item>
-        <!-- <el-menu-item index="1">
+       <el-menu-item index="1">
           <span slot="title">
             <NuxtLink
               to="/imageTask"
@@ -120,37 +120,37 @@
         <el-radio-button :label="true">collapse</el-radio-button>
       </el-radio-group> -->
       <el-menu
-        default-active="2"
+        default-active="0"
         class="leftMenu"
         @open="handleOpen"
         @close="handleClose"
         :collapse="isCollapse"
       >
-        <el-menu-item index="0">
+        <el-menu-item index="1">
           <i class="el-icon-setting"></i>
           <span slot="title">
             <NuxtLink to="/">Member</NuxtLink>
           </span>
         </el-menu-item>
-        <el-menu-item index="1">
+        <el-menu-item index="2">
           <i class="el-icon-location"></i>
           <span slot="title">
             <NuxtLink to="/Project/ProjectList">Project</NuxtLink>
           </span>
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="3">
           <i class="el-icon-menu"></i>
           <span slot="title">
             <NuxtLink to="/">Task</NuxtLink>
           </span>
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="4">
           <i class="el-icon-document"></i>
           <span slot="title">
             <NuxtLink to="/">Job</NuxtLink>
           </span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="5">
           <i class="el-icon-setting"></i>
           <span slot="title">
             <NuxtLink to="/">Image</NuxtLink>

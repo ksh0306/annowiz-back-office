@@ -56,6 +56,19 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
+    extend(config, ctx) {
+      const svgRule = config.module.rules.find((rule) =>
+        rule.test.test(".svg")
+      );
+      svgRule.exclude = [resolve(__dirname, "assets/icons/svg")];
+      config.module.rules.push({
+        test: /\.svg$/,
+        include: [resolve(__dirname, "assets/icons/svg")],
+        use: [
+          { loader: "svg-sprite-loader", options: { symbolId: "icon-[name]" } },
+        ],
+      });
+    },
     postcss: null,
   },
 
