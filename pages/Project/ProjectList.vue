@@ -82,7 +82,14 @@
           </el-table-column>
         </el-table>
         <div class="block">
-          <el-pagination layout="prev, pager, next" :total="50">
+          <el-pagination
+            layout="prev, pager, next"
+            @size-change="onChangePageSize"
+            @current-change="onChangePageCurrent"
+            :current-page.sync="page"
+            :page-size="perPageNum"
+            :total="totalCount"
+          >
           </el-pagination>
         </div>
       </el-card>
@@ -99,6 +106,10 @@ export default {
         name: "",
         region: "",
       },
+      page: 1,
+      perPageNum: 50,
+      totalCount: 0,
+      sortValue: null,
       ProjectListTable: {
         state: "",
       },
