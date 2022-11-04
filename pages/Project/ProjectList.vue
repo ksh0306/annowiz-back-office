@@ -1,11 +1,12 @@
 <template>
   <div class="app-container">
+    <!-- 프로젝트 조회 -->
     <el-row>
       <el-col :span="24">
         <h2 class="subjectTitle">프로젝트 조회</h2>
       </el-col>
     </el-row>
-
+    <!-- 프로젝트 검색 영역 -->
     <el-row>
       <el-card class="box-card" :body-style="{ padding: '0px' }">
         <el-col :span="24">
@@ -68,7 +69,7 @@
         </el-col>
       </el-card>
     </el-row>
-
+    <!-- 프로젝트 버튼 이벤트  -->
     <el-row type="flex" justify="space-between">
       <el-col :span="12">
         <el-select
@@ -169,12 +170,16 @@ export default {
       // tableList Select
       listCountOptions: [
         {
-          value: "10개",
+          value: "10",
           label: "10개",
         },
         {
-          value: "50개",
+          value: "50",
           label: "50개",
+        },
+        {
+          value: "100",
+          label: "100개",
         },
       ],
       tableListSelect: "",
@@ -227,7 +232,7 @@ export default {
         {
           prop: "subject",
           label: "제목",
-          minWidth: "155",
+          minWidth: "200",
         },
         {
           prop: "contents",
@@ -260,7 +265,7 @@ export default {
         {
           number: "01",
           userId: "ABC-123",
-          subject: "TestProject001",
+          subject: "TestProject001TestProject002",
           contents: "TestProject001",
           taskCount: "1234",
           date: "07-18-22",
