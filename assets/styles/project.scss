@@ -1,0 +1,91 @@
+@import "./common.scss";
+
+/*
+** Table
+*/
+
+.tableWrap {
+  .el-table {
+    color: $Light-Gray600;
+    font-size: 16px;
+
+    thead {
+      color: inherit;
+      font-weight: 700;
+    }
+
+    th.el-table__cell {
+      background-color: $Light-Gray100;
+    }
+
+    td.el-table__cell,
+    th.el-table__cell.is-leaf {
+      border-bottom: 1px solid $Light-Gray300;
+    }
+
+    .cell {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      line-height: 20px;
+      word-break: inherit;
+    }
+  }
+}
+
+/*
+** Pagination
+*/
+
+.CommonPagination {
+  .el-pagination {
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .el-pager {
+      display: inline-flex;
+      align-items: center;
+      gap: 0 4px;
+
+      li {
+        background: $Global-White;
+        font-size: 14px;
+        font-weight: 400;
+        min-width: 33px;
+        height: 37px;
+        line-height: 37px;
+        border-radius: 4px;
+      }
+      & .active,
+      & :hover {
+        color: $Global-White;
+        background-color: $Light-Primary500;
+      }
+    }
+
+    button,
+    span:not([class*="suffix"]) {
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 33px;
+      height: 37px;
+    }
+
+    button {
+      color: $Light-Gray600;
+
+      &:disabled {
+        color: $Light-Gray400;
+        background-color: $Global-White;
+        cursor: not-allowed;
+      }
+
+      .el-icon {
+        font-size: 16px;
+      }
+    }
+  }
+}

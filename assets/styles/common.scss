@@ -1,3 +1,5 @@
+@import "./index.scss";
+
 /*
 ** Color
 */
@@ -8,19 +10,30 @@ $Dark-Gray800: #202b3e;
 $Dark-Gray600: #20212b;
 $Dark-Gray500: #32333d;
 $Dark-Gray300: #5b5c6c;
+$Light-Gray800: #202b3e;
 $Light-Gray600: #49576c;
 $Light-Gray400: #97a6ba;
 $Light-Gray300: #ced8e3;
+$Light-Gray100: #f3f4f6;
 $Light-Primary500: #0084ff;
+
+$box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.3), 0px 3px 5px rgba(9, 30, 66, 0.2);
 
 /*
 ** Layout
 */
+
 .app-wrapper {
   position: relative;
   height: 100%;
   width: 100%;
-  background-color: #f3f4f6;
+  background-color: $Light-Gray100;
+}
+.subjectTitle {
+  color: $Light-Gray800;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
 }
 
 /*
@@ -41,6 +54,7 @@ header {
     height: 100%;
   }
 
+  // Logo
   h1 {
     margin: 0;
     display: inline-block;
@@ -62,6 +76,7 @@ header {
     }
   }
 
+  // Avatar
   .avatar {
     display: flex;
     align-items: center;
@@ -82,6 +97,7 @@ header {
 /*
 ** Footer
 */
+
 footer {
   margin: 0 40px;
   border-top: 1px solid $Light-Gray300;
@@ -100,5 +116,125 @@ footer {
     color: $Light-Gray600;
     font-size: 12px;
     font-weight: 400;
+  }
+}
+
+// Form
+.el-form {
+  .el-form-item {
+    margin-bottom: 24px;
+
+    .el-form-item__label {
+      padding: 0 20px 0 0;
+      color: $Light-Gray600;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Input
+.commonInput {
+  color: $Light-Gray600;
+  font-size: 16px;
+  font-weight: 400;
+
+  .el-input__inner {
+    border: 1px solid $Light-Gray300;
+    padding: 0 20px;
+
+    &::placeholder {
+      color: $Light-Gray400;
+    }
+  }
+}
+
+// Select
+.commonSelect {
+  .el-input {
+    color: $Light-Gray600;
+    font-size: 16px;
+    font-weight: 400;
+
+    .el-input__inner {
+      border: 1px solid $Light-Gray300;
+      padding: 0 40px 0 20px;
+
+      &::placeholder {
+        color: inherit;
+      }
+    }
+    &.is-focus .el-input__inner {
+      border-color: $Light-Gray300;
+    }
+
+    .el-input__suffix {
+      right: 20px;
+
+      .el-select__caret {
+        color: $Light-Gray600;
+        font-size: 24px;
+      }
+    }
+  }
+}
+// Select Dropdown List
+.el-select-dropdown {
+  box-shadow: $box-shadow;
+
+  .el-select-dropdown__list {
+    padding: 8px 0;
+
+    .el-select-dropdown__item {
+      padding: 0 8px;
+      height: 32px;
+      color: $Light-Gray600;
+      font-size: 14px;
+      line-height: 32px;
+
+      &.hover,
+      &:hover {
+        background-color: $Light-Gray100;
+      }
+    }
+  }
+
+  &[x-placement^="bottom"] {
+    margin-top: 4px;
+  }
+
+  .popper__arrow {
+    display: none;
+  }
+}
+
+// Button
+.commonButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 700;
+
+  // Icon
+  [class^="el-icon-"] {
+    font-size: 20px;
+  }
+  & [class*="el-icon-"] + span {
+    margin-left: 10px;
+  }
+
+  // Primary
+  &.el-button--primary {
+    color: $Global-White;
+    background-color: $Light-Primary500;
+    border-color: $Light-Primary500;
   }
 }
