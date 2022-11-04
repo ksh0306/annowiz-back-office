@@ -1,107 +1,173 @@
 <template>
   <div class="app-container">
     <el-row>
-      <el-card class="box-card">
-        <el-form ref="form" :model="form" label-width="120px">
-          <el-form-item label="제목">
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
-          <el-form-item label="날짜">
-            <el-select v-model="form.region" placeholder="등록 날짜">
-              <el-option label="Zone one" value="shanghai"></el-option>
-              <el-option label="Zone two" value="beijing"></el-option>
-            </el-select>
-            <el-date-picker
-              v-model="value1"
-              type="daterange"
-              range-separator="~"
-              start-placeholder="Start date"
-              end-placeholder="End date"
-            >
-            </el-date-picker>
-            <el-button type="primary" @click="onSubmit">검색</el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
+      <el-col :span="24">
+        <h2 class="subjectTitle">프로젝트 조회</h2>
+      </el-col>
     </el-row>
 
     <el-row>
-      <el-col :span="4">
-        <el-dropdown>
-          <span class="el-dropdown-link">
-            show : 10<i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>10</el-dropdown-item>
-            <el-dropdown-item>20</el-dropdown-item>
-            <el-dropdown-item>50</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </el-col>
-      <el-col :span="20">
-        <el-select v-model="ProjectListTable.state" placeholder="상태값">
-          <el-option label="Todo" value="Todo"></el-option>
-          <el-option label="In Progress" value="In Progress"></el-option>
-          <el-option label="Confirmed" value="Confirmed"></el-option>
-        </el-select>
-        <el-button type="primary">수정</el-button>
-        <el-button type="primary">삭제</el-button>
-        <el-button type="primary" icon="el-icon-circle-plus">등록</el-button>
-      </el-col>
-      <el-card class="box-card">
-        <el-table
-          :model="ProjectListTable"
-          :data="tableData"
-          style="width: 100%"
-          height="250"
-        >
-          <el-table-column fixed prop="check" label="" width="64">
-            <el-checkbox></el-checkbox>
-          </el-table-column>
-          <el-table-column prop="number" label="번호" width="40">
-          </el-table-column>
-          <el-table-column prop="userId" label="ID" width="100">
-          </el-table-column>
-          <el-table-column prop="title" label="제목" width="100">
-          </el-table-column>
-          <el-table-column prop="contents" label="내용" width="160">
-          </el-table-column>
-          <el-table-column prop="state" label="상태" width="100">
-          </el-table-column>
-          <el-table-column
-            prop="taskCount"
-            label="태스크 생성 개수"
-            width="136"
+      <el-card class="box-card" :body-style="{ padding: '0px' }">
+        <el-col :span="24">
+          <el-form
+            ref="form"
+            :model="form"
+            label-width="50px"
+            style="padding: 32px 20px"
           >
-          </el-table-column>
-          <el-table-column prop="date" label="등록날짜" width="120">
-          </el-table-column>
-          <el-table-column prop="dueDate" label="마감날짜" width="120">
-          </el-table-column>
-          <el-table-column prop="id" label="등록 ID" width="100">
-          </el-table-column>
-        </el-table>
-        <div class="block">
-          <el-pagination layout="prev, pager, next" :total="50">
-          </el-pagination>
-        </div>
+            <el-form-item label="제목">
+              <el-col :span="6" :xs="24" :sm="24" :md="8" :lg:="8">
+                <el-input
+                  v-model="form.subject"
+                  placeholder="프로젝트 명"
+                  class="commonInput"
+                ></el-input>
+              </el-col>
+            </el-form-item>
+            <el-form-item label="날짜">
+              <el-col :xs="24" :sm="24" :md="4" :lg="4">
+                <el-select
+                  v-model="dateSelect"
+                  placeholder="등록 날짜"
+                  class="commonSelect"
+                >
+                  <el-option
+                    v-for="item in dateOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </el-col>
+              <el-col :xs="24" :sm="24" :md="12" :lg="8">
+                <el-date-picker
+                  v-model="datePicker"
+                  type="daterange"
+                  range-separator="~"
+                  start-placeholder="Start date"
+                  end-placeholder="End date"
+                >
+                </el-date-picker>
+              </el-col>
+              <el-col :xs="24" :sm="24" :md="4" :lg="3">
+                <el-button
+                  native-type="submit"
+                  type="primary"
+                  class="commonButton"
+                  >검색</el-button
+                >
+                <el-button
+                  native-type="button"
+                  type="text"
+                  icon="el-icon-edit"
+                ></el-button>
+              </el-col>
+            </el-form-item>
+          </el-form>
+        </el-col>
       </el-card>
     </el-row>
+
+    <el-row type="flex" justify="space-between">
+      <el-col :span="12">
+        <el-select
+          v-model="tableListSelect"
+          placeholder="10개"
+          class="commonSelect"
+        >
+          <el-option
+            v-for="item in listCountOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+      </el-col>
+      <el-col :span="12">
+        <el-row type="flex" justify="end">
+          <el-button
+            native-type="button"
+            type="primary"
+            @click="deleteAlertOpen()"
+            >삭제</el-button
+          >
+          <el-button
+            native-type="button"
+            type="primary"
+            @click="moveRegister()"
+            icon="el-icon-circle-plus"
+            class="commonButton"
+            >등록</el-button
+          >
+        </el-row>
+      </el-col>
+    </el-row>
+
+    <el-card class="box-card" :body-style="{ padding: '0px' }">
+      <div class="tableWrap">
+        <el-table class="tableList" :data="tableData" style="width: 100%">
+          <el-table-column
+            v-for="column in columnTitles"
+            :key="column.prop"
+            :prop="column.prop"
+            :label="column.label"
+            :formatter="column.formatter"
+            :min-width="column.minWidth"
+          >
+          </el-table-column>
+          <el-table-column prop="edit" label="" width="97">
+            <template slot-scope="scope">
+              <el-button size="mini" native-type="button" @click="moveEdit()">
+                {{ scope.row.edit }}
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="CommonPagination">
+        <el-pagination layout="prev, pager, next" :total="50"></el-pagination>
+      </div>
+    </el-card>
   </div>
 </template>
 
 <script>
 export default {
-  methods: {},
+  name: "ProjectList",
   data() {
     return {
       form: {
-        name: "",
-        region: "",
+        subject: "",
       },
-      ProjectListTable: {
-        state: "",
-      },
+
+      // tableList Date Select
+      dateOptions: [
+        {
+          value: "2022-01-01",
+          label: "2022-01-01",
+        },
+        {
+          value: "2022-02-02",
+          label: "2022-02-02",
+        },
+      ],
+      dateSelect: "",
+
+      // tableList Select
+      listCountOptions: [
+        {
+          value: "10개",
+          label: "10개",
+        },
+        {
+          value: "50개",
+          label: "50개",
+        },
+      ],
+      tableListSelect: "",
+
       pickerOptions: {
         shortcuts: [
           {
@@ -133,35 +199,114 @@ export default {
           },
         ],
       },
-      value1: "",
+      datePicker: "",
+
+      // dataTable
+      columnTitles: [
+        {
+          prop: "number",
+          label: "번호",
+          minWidth: "70",
+        },
+        {
+          prop: "userId",
+          label: "ID",
+          minWidth: "126",
+        },
+        {
+          prop: "subject",
+          label: "제목",
+          minWidth: "155",
+        },
+        {
+          prop: "contents",
+          label: "내용",
+          minWidth: "155",
+        },
+        {
+          prop: "taskCount",
+          label: "테스크 생성 개수",
+          minWidth: "155",
+          align: "center",
+        },
+        {
+          prop: "date",
+          label: "등록 날짜",
+          minWidth: "127",
+        },
+        {
+          prop: "dueDate",
+          label: "마감 날짜",
+          minWidth: "126",
+        },
+        {
+          prop: "registerId",
+          label: "등록 ID",
+          minWidth: "126",
+        },
+      ],
       tableData: [
         {
-          type: "",
           number: "01",
           userId: "ABC-123",
-          title: "TestProject001",
+          subject: "TestProject001",
           contents: "TestProject001",
-          state: "Todo",
           taskCount: "1234",
           date: "07-18-22",
           dueDate: "12-18-22",
-          id: "abcd1234",
+          registerId: "abcd1234",
+          edit: "수정",
+        },
+        {
+          number: "02",
+          userId: "ABC-456",
+          subject: "TestProject002",
+          contents: "TestProject002",
+          taskCount: "1234",
+          date: "07-18-22",
+          dueDate: "12-18-22",
+          registerId: "abcd1234",
+          edit: "수정",
         },
       ],
     };
   },
   methods: {
-    onSubmit() {
-      alert("제출");
+    // 등록 페이지 이동
+    moveRegister() {
+      this.$router.push({ path: "/Project/ProjectCreate" });
+    },
+    // 수정 페이지 이동
+    moveEdit() {
+      this.$router.push({ path: "/form" });
+    },
+    // 삭제 알럿
+    deleteAlertOpen() {
+      this.$confirm("This will permanently delete the file. Continue?", {
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancel",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "Delete completed",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "Delete canceled",
+          });
+        });
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-/* @import "@/assets/styles/project.scss"; */
+<style lang="scss">
+@import "@/assets/styles/project.scss";
 .el-row {
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 
   & :last-child {
     margin-bottom: 0;
