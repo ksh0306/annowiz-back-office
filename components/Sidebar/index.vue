@@ -121,29 +121,65 @@
       </el-radio-group> -->
       <el-menu
         default-active="0"
-        class="leftMenu"
-        @open="handleOpen"
-        @close="handleClose"
         :collapse="isCollapse"
+        :background-color="variables.menuBg"
+        :text-color="variables.menuText"
+        :unique-opened="false"
+        :active-text-color="variables.menuActiveText"
+        :collapse-transition="false"
+        mode="vertical"
       >
-        <el-menu-item index="1">
-          <i class="el-icon-setting"></i>
-          <span slot="title">
-            <NuxtLink to="/">Member</NuxtLink>
-          </span>
-        </el-menu-item>
-        <el-menu-item index="2">
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span slot="title"> Member </span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="1-1">
+              <NuxtLink to="/sample">- 회원 조회</NuxtLink>
+            </el-menu-item>
+            <el-menu-item index="1-2">
+              <NuxtLink to="/Project/ProjectList">-회원 등록</NuxtLink>
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <!-- <el-menu-item index="2">
           <i class="el-icon-location"></i>
           <span slot="title">
             <NuxtLink to="/Project/ProjectList">Project</NuxtLink>
           </span>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-menu"></i>
-          <span slot="title">
-            <NuxtLink to="/">Task</NuxtLink>
-          </span>
-        </el-menu-item>
+        </el-menu-item> -->
+
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span slot="title"> Project </span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="2-1">
+              <NuxtLink to="/Project/ProjectList">-프로젝트 조회</NuxtLink>
+            </el-menu-item>
+            <el-menu-item index="2-2">
+              <NuxtLink to="/sample">-프로젝트 등록</NuxtLink>
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+
+        <el-submenu index="3">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span slot="title"> Task </span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="3-1">
+              <NuxtLink to="/Project/ProjectList">-작업 조회</NuxtLink>
+            </el-menu-item>
+            <el-menu-item index="3-2">
+              <NuxtLink to="/sample">-작업 등록</NuxtLink>
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+
         <el-menu-item index="4">
           <i class="el-icon-document"></i>
           <span slot="title">
@@ -164,21 +200,21 @@
 <script>
 import { mapGetters } from "vuex";
 //import Logo from "./Logo";
-//import variables from "@/assets/styles/variables.scss";
+import variables from "@/assets/styles/variables.scss";
 
 export default {
   // components: { Logo },
-  // computed: {
-  //   showLogo() {
-  //     // return this.$store.state.settings.sidebarLogo;
-  //   },
-  //   variables() {
-  //     return variables;
-  //   },
-  //   isCollapse() {
-  //     return false;
-  //   },
-  // },
+  computed: {
+    showLogo() {
+      // return this.$store.state.settings.sidebarLogo;
+    },
+    variables() {
+      return variables;
+    },
+    isCollapse() {
+      return false;
+    },
+  },
   data() {
     return {
       isCollapse: false,
