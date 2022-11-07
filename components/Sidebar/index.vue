@@ -145,13 +145,6 @@
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <!-- <el-menu-item index="2">
-          <i class="el-icon-location"></i>
-          <span slot="title">
-            <NuxtLink to="/Project/ProjectList">Project</NuxtLink>
-          </span>
-        </el-menu-item> -->
-
         <el-submenu index="2">
           <template slot="title">
             <span class="svg-container">
@@ -168,7 +161,6 @@
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-
         <el-submenu index="3">
           <template slot="title">
             <span class="svg-container">
