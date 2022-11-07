@@ -10,6 +10,7 @@ $Dark-Gray800: #202b3e;
 $Dark-Gray600: #20212b;
 $Dark-Gray500: #32333d;
 $Dark-Gray300: #5b5c6c;
+$Dark-Primary500: #168fff;
 $Light-Gray800: #202b3e;
 $Light-Gray600: #49576c;
 $Light-Gray400: #97a6ba;
@@ -67,6 +68,10 @@ header {
       font-size: 18px;
       font-weight: 700;
       line-height: 20px;
+
+      &:hover {
+        color: $Global-White;
+      }
     }
 
     i {
