@@ -69,7 +69,7 @@ export default {
 //@import "@/assets/styles/variables.scss";
 
 .main-container {
-  // min-height: 100%;
+  min-height: inherit !important;
   // transition: margin-left 0.28s;
   // margin-left: $sideBarWidth;
   // position: relative;
@@ -82,6 +82,8 @@ export default {
   flex-direction: column;
   width: calc(100% - 240px);
   height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
 }
 // .app-wrapper {
 //   @include clearfix;
