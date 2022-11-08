@@ -20,7 +20,7 @@
     "element-theme-dark": "^1.0.3",
     "element-ui": "^2.15.10",
     "normalize.css": "^8.0.1",
-    "nuxt": "^2.15.8",
+    "nuxt": "^2.13.3",
     "nuxt-vuex-localstorage": "^1.2.7",
     "sass": "^1.28.0",
     "sass-loader": "^10.3.1",
@@ -31,5 +31,16 @@
     "vue-template-compiler": "^2.7.10",
     "vuex": "^3.5.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^3.1.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/style-resources": "^1.2.1",
+    "@nuxtjs/stylelint-module": "^4.0.0",
+    "babel-eslint": "^10.1.0",
+    "element-theme-dark": "^1.0.3",
+    "eslint": "^7.10.0",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "stylelint": "^13.7.2",
+    "stylelint-config-standard": "^20.0.0"
+  }
 }
