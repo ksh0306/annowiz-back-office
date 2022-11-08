@@ -66,7 +66,7 @@ header {
       gap: 0 8px;
       color: $Global-White;
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 500;
       line-height: 20px;
 
       &:hover {
@@ -74,10 +74,14 @@ header {
       }
     }
 
-    i {
+    .svg-container {
       width: 40px;
       height: 40px;
-      font-size: 40px;
+
+      .svg-icon {
+        width: inherit;
+        height: inherit;
+      }
     }
   }
 
