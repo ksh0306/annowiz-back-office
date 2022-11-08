@@ -8,10 +8,7 @@
       <el-menu
         default-active="0"
         :collapse="isCollapse"
-        :background-color="variables.Dark - Gray600"
-        :text-color="variables.menuText"
         :unique-opened="false"
-        :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
         mode="vertical"
       >
