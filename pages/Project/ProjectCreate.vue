@@ -6,11 +6,93 @@
       </el-card>
     </el-row>
 
-    <el-card class="box-card" :body-style="{ padding: '0px' }">
+    <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>프로젝트 생성</span>
       </div>
-      <div class="text item"></div>
+      <el-form :model="formInline" :label-position="horizontalItems">
+        <el-form-item label="ID">
+          <el-input v-model="formInline.userId"></el-input>
+        </el-form-item>
+        <el-form-item label="제목">
+          <el-input v-model="formInline.title" placeholder="제목"></el-input>
+        </el-form-item>
+        <el-form-item label="내용">
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 4 }"
+            placeholder="내용 입력"
+            v-model="formInline.contents"
+          >
+          </el-input>
+        </el-form-item>
+
+        <el-form-item label="마감 기간">
+          <div class="CommonDatePicker">
+            <el-date-picker
+              v-model="startDate"
+              type="date"
+              placeholder="날짜 선택"
+              format="yy-MM-dd"
+              :clearable="false"
+            >
+            </el-date-picker>
+          </div>
+        </el-form-item>
+        <el-form-item label="라벨">
+          <el-button type="secondary" class="commonButton">라벨 추가</el-button>
+          <el-col>
+            <div>
+              <el-form-item label="라벨 이름">
+                <el-input v-model="formInline.userId"></el-input>
+              </el-form-item>
+            </div>
+            <div>
+              <el-form-item label="색상 선택">
+                <el-color-picker
+                  v-model="colorPicker"
+                  class="commonColorPicker"
+                ></el-color-picker>
+              </el-form-item>
+            </div>
+            <div>
+              <el-form-item label="라인 선택">
+                <el-select
+                  v-model="lineSelect"
+                  placeholder="라인 선택"
+                  class="commonSelect"
+                >
+                  <el-option
+                    v-for="item in lineOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </div>
+            <div>
+              <el-button type="secondary" class="commonButton">취소</el-button>
+              <el-button type="primary" class="commonButton">등록</el-button>
+            </div>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="프로젝트 회원">
+          <el-button
+            type="secondary"
+            @click="dialogMemberAdd = true"
+            class="commonButton"
+            >회원 추가</el-button
+          >
+        </el-form-item>
+        <el-form-item>
+          <el-row type="flex" justify="end">
+            <el-button type="primary" class="commonButton">취소</el-button>
+            <el-button type="primary" class="commonButton">등록</el-button>
+          </el-row>
+        </el-form-item>
+      </el-form>
     </el-card>
   </div>
 </template>
@@ -18,9 +100,58 @@
 <script>
 export default {
   name: "ProjectCreate",
-  data() {},
+  data() {
+    return {
+      horizontalItems: "top",
+      formInline: {
+        userId: "",
+        title: "",
+        contents: "",
+      },
+
+      // 마감 기간 DatePicker
+      startDate: "",
+
+      // 색상 선택 colorPicker
+      colorPicker: "",
+
+      // 라인 선택 Select
+      lineOptions: [
+        {
+          value: "solid",
+          label: "solid",
+        },
+        {
+          value: "dashed",
+          label: "dashed",
+        },
+        {
+          value: "double",
+          label: "double",
+        },
+        {
+          value: "groove",
+          label: "groove",
+        },
+        {
+          value: "ridge",
+          label: "ridge",
+        },
+        {
+          value: "inset",
+          label: "inset",
+        },
+        {
+          value: "outset",
+          label: "outset",
+        },
+      ],
+      lineSelect: "",
+    };
+  },
 
   methods: {
+    // 이전 페이지 이동
     goBack() {
       this.$router.go(-1);
     },
@@ -35,44 +166,6 @@ export default {
 
   & :last-child {
     margin-bottom: 0;
-  }
-}
-
-// Title
-.el-page-header {
-  display: flex;
-  line-height: 24px;
-
-  .el-page-header__left {
-    margin-right: 0;
-    align-items: center;
-    gap: 0 20px;
-
-    // Title
-    .el-page-header__title {
-      color: $Light-Gray800;
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 30px;
-    }
-
-    // Icon
-    .el-icon-back {
-      margin-right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      color: $Light-Primary500;
-      font-size: 20px;
-      border: 2px solid $Light-Primary500;
-      border-radius: 4px;
-    }
-
-    &::after {
-      content: none;
-    }
   }
 }
 </style>
