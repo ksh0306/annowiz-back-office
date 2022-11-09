@@ -1,8 +1,22 @@
-@import "./index.scss";
+@import "../variables/colors.scss";
 
 /*
 ** Layout
 */
+
+.el-card {
+  border: none;
+  box-shadow: $box-shadow !important;
+
+  .el-card__header {
+    padding: 40px 20px;
+    color: $Light-Gray600;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 21px;
+    border-bottom: 1px solid $Light-Gray300;
+  }
+}
 
 .app-wrapper {
   position: relative;
@@ -10,6 +24,8 @@
   width: 100%;
   background-color: $Light-Gray100;
 }
+
+// Title
 .subjectTitle {
   color: $Light-Gray800;
   font-size: 20px;
@@ -17,9 +33,48 @@
   line-height: 30px;
 }
 
+// Subject Title
+.el-page-header {
+  display: flex;
+  line-height: 24px;
+
+  .el-page-header__left {
+    margin-right: 0;
+    align-items: center;
+    gap: 0 20px;
+
+    // Title
+    .el-page-header__title {
+      color: $Light-Gray800;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 30px;
+    }
+
+    // Icon
+    .el-icon-back {
+      margin-right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      color: $Light-Primary500;
+      font-size: 20px;
+      border: 2px solid $Light-Primary500;
+      border-radius: 4px;
+    }
+
+    &::after {
+      content: none;
+    }
+  }
+}
+
 /*
 ** Header
 */
+
 header {
   position: relative;
   width: 100%;
@@ -46,7 +101,7 @@ header {
       gap: 0 8px;
       color: $Global-White;
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 500;
       line-height: 20px;
 
       &:hover {
@@ -54,10 +109,14 @@ header {
       }
     }
 
-    i {
+    .svg-container {
       width: 40px;
       height: 40px;
-      font-size: 40px;
+
+      .svg-icon {
+        width: inherit;
+        height: inherit;
+      }
     }
   }
 
@@ -114,11 +173,37 @@ footer {
       color: $Light-Gray600;
       font-size: 16px;
       font-weight: 700;
+      line-height: 24px;
       text-align: left;
     }
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    .el-form-item__content {
+      .el-col {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+      }
+    }
+  }
+
+  // horizontal
+  &.el-form--label-top {
+    .el-form-item {
+      margin-bottom: 20px;
+
+      .el-form-item__label {
+        padding: 0;
+        margin-bottom: 8px;
+      }
+
+      & :last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -149,6 +234,7 @@ footer {
     .el-input__inner {
       border: 1px solid $Light-Gray300;
       padding: 0 40px 0 20px;
+      max-width: 149px;
 
       &::placeholder {
         color: inherit;
@@ -165,6 +251,15 @@ footer {
         color: $Light-Gray600;
         font-size: 24px;
       }
+    }
+  }
+
+  //size
+  .el-input--mini {
+    .el-input__inner {
+      height: 40px;
+      max-width: 109px;
+      font-weight: 700;
     }
   }
 }
@@ -203,10 +298,16 @@ footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 100px;
+  width: 100%;
   height: 40px;
+  max-width: 100px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
+  line-height: 20px;
+
+  & + .el-button {
+    margin-left: 12px;
+  }
 
   // Icon
   [class^="el-icon-"] {
@@ -221,5 +322,75 @@ footer {
     color: $Global-White;
     background-color: $Light-Primary500;
     border-color: $Light-Primary500;
+  }
+
+  // Primary
+  &.el-button--secondary {
+    color: $Light-Primary500;
+    border: 2px solid $Light-Gray300;
+  }
+
+  // Text Type
+  &.el-button--text {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+
+    .svg-icon {
+      color: $Global-Black;
+      font-size: 24px;
+    }
+  }
+
+  //size
+  &.el-button--mini {
+    max-width: 66px;
+  }
+}
+
+// DatePicker
+.CommonDatePicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0 8px;
+  color: $Light-Gray600;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__inner {
+    max-width: 151px;
+    width: auto;
+  }
+
+  .el-input__inner {
+    padding: 0 50px 0 20px;
+    color: $Light-Gray600;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    border: 1px solid $Light-Gray300;
+
+    &::placeholder {
+      color: $Light-Gray400;
+    }
+  }
+
+  //Icon
+  .el-input__prefix {
+    left: auto;
+    right: 20px;
+    width: 24px;
+    color: $Light-Gray600;
+    font-size: 24px;
+  }
+}
+
+// ColorPicker
+.commonColorPicker {
+  .el-color-picker__trigger {
+    // width: 100%;
+    // max-width: 240px;
   }
 }

@@ -22,10 +22,9 @@
     }
 
     .cell {
-      padding-left: 20px !important;
-      padding-right: 20px !important;
+      padding: 0 20px !important;
       line-height: 20px;
-      word-break: inherit;
+      word-break: break-all;
     }
   }
 }
