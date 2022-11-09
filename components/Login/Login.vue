@@ -35,14 +35,13 @@
           <li>
             <label>Password</label>
             <el-tooltip
-              v-model="capsTooltip"
-              content="Caps lock is On"
+              v-model="isCapsLock"
+              content="Caps lock is on"
               placement="right"
               manual
             >
               <el-form-item prop="password">
                 <el-input
-                  :key="passwordType"
                   ref="password"
                   v-model="loginForm.password"
                   :type="isPasswordHidden ? 'password' : 'text'"
@@ -50,8 +49,8 @@
                   name="password"
                   tabindex="2"
                   autocomplete="on"
-                  @keyup.native="checkCapslock"
-                  @blur="capsTooltip = false"
+                  @keyup.native="checkCapsLock"
+                  @blur="isCapsLock = false"
                   @keyup.enter.native="handleLogin"
                 >
                   <i slot="prefix" class="el-input__icon el-icon-lock"></i>
@@ -101,15 +100,14 @@ export default {
         ],
       },
       isPasswordHidden: true,
-      capsTooltip: false,
+      isCapsLock: false,
       loading: false,
     };
   },
   mounted() {},
   methods: {
-    checkCapslock(e) {
-      const { key } = e;
-      this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
+    checkCapsLock(e) {
+      this.isCapsLock = e.getModifierState('CapsLock');
     },
     showPassword() {
       this.isPasswordHidden = !this.isPasswordHidden;
