@@ -45,7 +45,7 @@
                   :key="passwordType"
                   ref="password"
                   v-model="loginForm.password"
-                  :type="passwordType"
+                  :type="isPasswordHidden ? 'password' : 'text'"
                   placeholder="Password"
                   name="password"
                   tabindex="2"
@@ -58,9 +58,8 @@
                   <svg-icon
                     class="show-pwd"
                     slot="suffix"
-                    :icon-class="
-                      passwordType === 'password' ? 'eye' : 'eye-open'
-                    "
+                    :icon-class="isPasswordHidden ? 'eye' : 'eye-open'"
+                    @click="showPassword"
                   />
                 </el-input>
               </el-form-item>
@@ -101,7 +100,7 @@ export default {
           { required: true, trigger: "blur", validator: validatePassword },
         ],
       },
-      passwordType: "password",
+      isPasswordHidden: true,
       capsTooltip: false,
       loading: false,
     };
@@ -111,6 +110,13 @@ export default {
     checkCapslock(e) {
       const { key } = e;
       this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
+    },
+    showPassword() {
+      this.isPasswordHidden = !this.isPasswordHidden;
+
+      this.$nextTick(() => {
+        this.$refs.password.focus();
+      });
     },
     // 로그인 로직 처리 예정
     handleLogin() {
