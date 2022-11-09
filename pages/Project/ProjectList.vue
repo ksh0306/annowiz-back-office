@@ -6,6 +6,7 @@
         <h2 class="subjectTitle">프로젝트 조회</h2>
       </el-col>
     </el-row>
+
     <!-- 프로젝트 검색 영역 -->
     <el-row>
       <el-card class="box-card" :body-style="{ padding: '0px' }">
@@ -17,16 +18,17 @@
             style="padding: 32px 20px"
           >
             <el-form-item label="제목">
-              <el-col :span="6" :xs="24" :sm="24" :md="8" :lg:="8">
+              <el-col>
                 <el-input
                   v-model="form.subject"
                   placeholder="프로젝트 명"
                   class="commonInput"
+                  style="max-width: 300px"
                 ></el-input>
               </el-col>
             </el-form-item>
             <el-form-item label="날짜">
-              <el-col :xs="24" :sm="24" :md="4" :lg="4">
+              <el-col>
                 <el-select
                   v-model="dateSelect"
                   placeholder="등록 날짜"
@@ -40,18 +42,25 @@
                   >
                   </el-option>
                 </el-select>
-              </el-col>
-              <el-col :xs="24" :sm="24" :md="12" :lg="8">
-                <el-date-picker
-                  v-model="datePicker"
-                  type="daterange"
-                  range-separator="~"
-                  start-placeholder="Start date"
-                  end-placeholder="End date"
-                >
-                </el-date-picker>
-              </el-col>
-              <el-col :xs="24" :sm="24" :md="4" :lg="3">
+                <div class="CommonDatePicker">
+                  <el-date-picker
+                    v-model="startDate"
+                    type="date"
+                    placeholder="날짜 선택"
+                    format="yy-MM-dd"
+                    :clearable="false"
+                  >
+                  </el-date-picker>
+                  ~
+                  <el-date-picker
+                    v-model="endDate"
+                    type="date"
+                    placeholder="날짜 선택"
+                    format="yy-MM-dd"
+                    :clearable="false"
+                  >
+                  </el-date-picker>
+                </div>
                 <el-button
                   native-type="submit"
                   type="primary"
@@ -61,21 +70,27 @@
                 <el-button
                   native-type="button"
                   type="text"
-                  icon="el-icon-edit"
-                ></el-button>
+                  class="commonButton"
+                >
+                  <span class="svg-container">
+                    <svg-icon icon-class="refresh" />
+                  </span>
+                </el-button>
               </el-col>
             </el-form-item>
           </el-form>
         </el-col>
       </el-card>
     </el-row>
+
     <!-- 프로젝트 버튼 이벤트  -->
     <el-row type="flex" justify="space-between">
-      <el-col :span="12">
+      <el-col>
         <el-select
           v-model="tableListSelect"
           placeholder="10개"
           class="commonSelect"
+          size="mini"
         >
           <el-option
             v-for="item in listCountOptions"
@@ -86,14 +101,8 @@
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span="12">
+      <el-col>
         <el-row type="flex" justify="end">
-          <el-button
-            native-type="button"
-            type="primary"
-            @click="deleteAlertOpen()"
-            >삭제</el-button
-          >
           <el-button
             native-type="button"
             type="primary"
@@ -118,9 +127,15 @@
             :min-width="column.minWidth"
           >
           </el-table-column>
-          <el-table-column prop="edit" label="" width="97">
+          <el-table-column prop="edit" label="" width="106">
             <template slot-scope="scope">
-              <el-button size="mini" native-type="button" @click="moveEdit()">
+              <el-button
+                size="mini"
+                native-type="button"
+                @click="moveEdit()"
+                type="secondary"
+                class="commonButton"
+              >
                 {{ scope.row.edit }}
               </el-button>
             </template>
@@ -162,6 +177,7 @@ export default {
       perPageNum: 10,
       totalCount: 0,
       sortValue: null,
+<<<<<<< HEAD
       criteria: {
         page: 1,
         perPageNum: 10,
@@ -169,15 +185,21 @@ export default {
         // keyword: '',
         // cntntsTyCodeSn: this.cntntsTyCodeSn
       },
+=======
+
+      startDate: "",
+      endDate: "",
+
+>>>>>>> 00d3d7c06ceec8772c8211487352327aa7de913d
       // tableList Date Select
       dateOptions: [
         {
-          value: "2022-01-01",
-          label: "2022-01-01",
+          value: "22-11-08",
+          label: "22-11-08",
         },
         {
-          value: "2022-02-02",
-          label: "2022-02-02",
+          value: "22-11-09",
+          label: "22-11-09",
         },
       ],
       dateSelect: "",
@@ -198,39 +220,6 @@ export default {
         },
       ],
       tableListSelect: "",
-
-      pickerOptions: {
-        shortcuts: [
-          {
-            text: "Last week",
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", [start, end]);
-            },
-          },
-          {
-            text: "Last month",
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit("pick", [start, end]);
-            },
-          },
-          {
-            text: "Last 3 months",
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit("pick", [start, end]);
-            },
-          },
-        ],
-      },
-      datePicker: "",
 
       // dataTable
       columnTitles: [
@@ -289,26 +278,7 @@ export default {
     },
     // 수정 페이지 이동
     moveEdit() {
-      this.$router.push({ path: "/form" });
-    },
-    // 삭제 알럿
-    deleteAlertOpen() {
-      this.$confirm("This will permanently delete the file. Continue?", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-      })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "Delete completed",
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "Delete canceled",
-          });
-        });
+      this.$router.push({ path: "/Project/ProjectModify" });
     },
     async projectList() {
       try {
