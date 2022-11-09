@@ -102,7 +102,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import variables from "@/assets/styles/variables.scss";
 
 export default {
   computed: {
