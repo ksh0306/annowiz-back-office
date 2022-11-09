@@ -75,4 +75,7 @@ export default {
   router: {
     middleware: "auth",
   },
+  server: {
+    port: 4000,
+  },
 };
