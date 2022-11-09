@@ -108,10 +108,10 @@
 
     <el-card class="box-card" :body-style="{ padding: '0px' }">
       <div class="tableWrap">
-        <el-table class="tableList" :data="tableData" style="width: 100%">
+        <el-table class="tableList" :data="projectListData" style="width: 100%">
           <el-table-column
             v-for="column in columnTitles"
-            :key="column.prop"
+            :key="column.id"
             :prop="column.prop"
             :label="column.label"
             :formatter="column.formatter"
@@ -129,12 +129,12 @@
       </div>
       <div class="CommonPagination">
         <el-pagination
-          layout="prev, pager, next"
+          layout="total, sizes, prev, pager, next"
           @size-change="onChangePageSize"
           @current-change="onChangePageCurrent"
-          :current-page.sync="page"
-          :page-size="perPageNum"
-          :total="totalCount"
+          :current-page.sync="criteria.page"
+          :page-size="criteria.perPageNum"
+          :total="criteria.totalCount"
         ></el-pagination>
       </div>
     </el-card>
@@ -142,18 +142,33 @@
 </template>
 
 <script>
+import axios from "axios";
+
+const API = {
+  RESULT_TABLEDATA_LIST: "http://localhost:3000/tableData",
+};
 export default {
   name: "ProjectList",
+
+  // async asyncData() {
+
+  // },
   data() {
     return {
       form: {
         subject: "",
       },
       page: 1,
-      perPageNum: 50,
+      perPageNum: 10,
       totalCount: 0,
       sortValue: null,
-
+      criteria: {
+        page: 1,
+        perPageNum: 10,
+        totalCount: 0,
+        // keyword: '',
+        // cntntsTyCodeSn: this.cntntsTyCodeSn
+      },
       // tableList Date Select
       dateOptions: [
         {
@@ -220,7 +235,7 @@ export default {
       // dataTable
       columnTitles: [
         {
-          prop: "number",
+          prop: "id",
           label: "번호",
           minWidth: "70",
         },
@@ -261,31 +276,11 @@ export default {
           minWidth: "126",
         },
       ],
-      tableData: [
-        {
-          number: "01",
-          userId: "ABC-123",
-          subject: "TestProject001TestProject002",
-          contents: "TestProject001",
-          taskCount: "1234",
-          date: "07-18-22",
-          dueDate: "12-18-22",
-          registerId: "abcd1234",
-          edit: "수정",
-        },
-        {
-          number: "02",
-          userId: "ABC-456",
-          subject: "TestProject002",
-          contents: "TestProject002",
-          taskCount: "1234",
-          date: "07-18-22",
-          dueDate: "12-18-22",
-          registerId: "abcd1234",
-          edit: "수정",
-        },
-      ],
+      projectListData: [],
     };
+  },
+  mounted() {
+    this.projectList();
   },
   methods: {
     // 등록 페이지 이동
@@ -314,6 +309,35 @@ export default {
             message: "Delete canceled",
           });
         });
+    },
+    async projectList() {
+      try {
+        const url = API.RESULT_TABLEDATA_LIST;
+        const result = await axios.get(url);
+        this.projectListData = result.data.map((item) => {
+          return {
+            id: item.id,
+            userId: item.userId,
+            subject: item.subject,
+            contents: item.contents,
+            taskCount: item.taskCount,
+            date: item.date,
+            dueDate: item.dueDate,
+            registerId: item.registerId,
+            edit: item.edit,
+          };
+        });
+      } catch (error) {
+        this.$alert(error.message);
+      }
+    },
+    onChangePageSize(pageNum) {
+      console.log(pageNum);
+      this.criteria.perPageNum = pageNum;
+      this.criteria.page = 1;
+    },
+    onChangePageCurrent(no) {
+      this.criteria.page = no;
     },
   },
 };
