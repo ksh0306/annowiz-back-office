@@ -44,13 +44,13 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/style-resources'],
+  buildModules: ["@nuxtjs/style-resources"],
   styleResources: {
     scss: [
-      '@/assets/variables/_colors.scss',
-      '@/assets/variables/_variables.scss',
-      '@/assets/variables/_mixins.scss',
-    ]
+      "@/assets/variables/_colors.scss",
+      "@/assets/variables/_variables.scss",
+      "@/assets/variables/_mixins.scss",
+    ],
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -78,7 +78,23 @@ export default {
     },
     postcss: null,
   },
-
+  axios: {
+    retry: {
+      // 최대 재전송 횟수 4회
+      retries: 4,
+      // 재전송 간 타임아웃을 리셋하기
+      shouldResetTimeout: true,
+      // 재전송 횟수 * 0.1초만큼 재전송 시작 시간을 지연시키기
+      retryDelay: (retry) => {
+        return retry * 100;
+      },
+      // 서버 혼잡이 일어났을 경우에만 재전송하기
+      retryCondition: (error) => err.response.status === 429,
+    },
+    // 로딩바를 사용하도록 설정
+    progress: true,
+    // baseURL: process.env.API_URL, // env 변수 값을 가져와서 사용한다.
+  },
   router: {
     middleware: "auth",
   },
