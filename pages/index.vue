@@ -1,4 +1,7 @@
 <template>
+  <div class="app-container">
+    <Nuxt />
+  </div>
 </template>
 
 <script>

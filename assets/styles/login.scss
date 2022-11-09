@@ -125,20 +125,10 @@
             }
           }
 
-          .svg-container {
-            padding: 0 0 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: $Light-Gray600;
-            width: 60px;
-            height: 48px;
-
-            .svg-icon {
-              width: 24px;
-              height: 24px;
-              fill: $Light-Gray600;
-            }
+          .svg-icon {
+            width: 24px;
+            height: 24px;
+            fill: $Light-Gray600;
           }
 
           .show-pwd {

@@ -3,14 +3,15 @@
     <div class="loginWrap">
       <div class="imageWrap">
         <img src="http://dev.annowiz.com:18080/intro.10802bc0.svg" alt="" />
+      </div>
         <el-form
-        ref="loginForm"
-        :model="loginForm"
-        :rules="loginRules"
-        class="loginForm"
-        autocomplete="on"
-        label-position="left"
-      >
+          ref="loginForm"
+          :model="loginForm"
+          :rules="loginRules"
+          class="loginForm"
+          autocomplete="on"
+          label-position="left"
+          >
         <div class="title-container">
           <h3 class="title">BackOffice Login</h3>
         </div>
@@ -18,9 +19,6 @@
           <li>
             <label>Username</label>
             <el-form-item prop="username">
-              <span class="svg-container">
-                <svg-icon icon-class="user" />
-              </span>
               <el-input
                 ref="username"
                 v-model="loginForm.username"
@@ -28,8 +26,9 @@
                 name="username"
                 type="text"
                 tabindex="1"
-                autocomplete="on"
-              />
+                autocomplete="on">
+                <i slot="prefix" class="el-input__icon el-icon-user"></i>
+              </el-input>
             </el-form-item>
           </li>
           <li>
@@ -41,9 +40,6 @@
               manual
             >
               <el-form-item prop="password">
-                <span class="svg-container">
-                  <svg-icon icon-class="password" />
-                </span>
                 <el-input
                   :key="passwordType"
                   ref="password"
@@ -56,14 +52,16 @@
                   @keyup.native="checkCapslock"
                   @blur="capsTooltip = false"
                   @keyup.enter.native="handleLogin"
-                />
-                <span class="show-pwd" @click="showPwd">
+                >
+                  <i slot="prefix" class="el-input__icon el-icon-lock"></i>
                   <svg-icon
+                    class="show-pwd"
+                    slot="suffix"
                     :icon-class="
                       passwordType === 'password' ? 'eye' : 'eye-open'
                     "
                   />
-                </span>
+                </el-input>
               </el-form-item>
             </el-tooltip>
           </li>
@@ -75,13 +73,12 @@
           >Login</el-button
         >
       </el-form>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { postLogin } from '@/middleware/api';
+// import { postLogin } from '@/middleware/api';
 
 export default {
   data() {
@@ -114,20 +111,10 @@ export default {
       const { key } = e;
       this.capsTooltip = key && key.length === 1 && key >= 'A' && key <= 'Z';
     },
-    showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = '';
-      } else {
-        this.passwordType = 'password';
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
-    },
     // 로그인 로직 처리 예정
     handleLogin() {
       const { username, password } = this;
-      postLogin({ username, password });
+      // postLogin({ username, password });
 
       this.router.push({
         name: 'project',
