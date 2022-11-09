@@ -114,17 +114,24 @@
         </el-row>
       </el-col>
     </el-row>
-
+    <!-- 페이징, 리스트 공통  현재구조에서는 -->
     <el-card class="box-card" :body-style="{ padding: '0px' }">
       <div class="tableWrap">
-        <el-table class="tableList" :data="projectListData" style="width: 100%">
+        <el-table
+          class="tableList"
+          :data="projectListData"
+          style="width: 100%"
+          @sort-change="sortChange"
+        >
           <el-table-column
             v-for="column in columnTitles"
             :key="column.id"
             :prop="column.prop"
             :label="column.label"
-            :formatter="column.formatter"
+            :formatter="column.value"
             :min-width="column.minWidth"
+            :fixed="column.fixed"
+            :sortable="column.sortable"
           >
           </el-table-column>
           <el-table-column prop="edit" label="" width="106">
@@ -164,10 +171,6 @@ const API = {
 };
 export default {
   name: "ProjectList",
-
-  // async asyncData() {
-
-  // },
   data() {
     return {
       form: {
@@ -181,6 +184,7 @@ export default {
         page: 1,
         perPageNum: 10,
         totalCount: 0,
+        order: null,
         // keyword: '',
         // cntntsTyCodeSn: this.cntntsTyCodeSn
       },
@@ -221,43 +225,53 @@ export default {
         {
           prop: "id",
           label: "번호",
-          minWidth: "70",
+          minWidth: "80",
+          sortable: "custom",
         },
         {
           prop: "userId",
           label: "ID",
           minWidth: "126",
+          sortable: "custom",
         },
         {
           prop: "subject",
           label: "제목",
           minWidth: "200",
+          value: (row, column, cellValue, index) => cellValue,
+          detailLink: true,
+          sortable: "custom",
         },
         {
           prop: "contents",
           label: "내용",
           minWidth: "155",
+          sortable: "custom",
         },
         {
           prop: "taskCount",
           label: "테스크 생성 개수",
           minWidth: "155",
           align: "center",
+          sortable: "custom",
         },
         {
           prop: "date",
           label: "등록 날짜",
           minWidth: "127",
+          sortable: "custom",
         },
         {
           prop: "dueDate",
           label: "마감 날짜",
           minWidth: "126",
+          sortable: "custom",
         },
         {
           prop: "registerId",
           label: "등록 ID",
           minWidth: "126",
+          sortable: "custom",
         },
       ],
       projectListData: [],
@@ -303,6 +317,17 @@ export default {
     },
     onChangePageCurrent(no) {
       this.criteria.page = no;
+    },
+    sortChange(val) {
+      console.log(val);
+      if (val.prop === "userId") {
+        // vm.criteria.order = "CONTENTS_CNT";
+      } else if (val.prop === "subject") {
+        // vm.criteria.order = "SUBSCRIBER_CNT";
+      } else {
+        console.log("1111");
+        // vm.criteria.order = null;
+      }
     },
   },
 };
