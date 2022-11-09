@@ -65,9 +65,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/styles/mixin.scss";
-//@import "@/assets/styles/variables.scss";
-
 .main-container {
   min-height: inherit !important;
   // transition: margin-left 0.28s;
