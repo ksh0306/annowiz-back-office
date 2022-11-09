@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  layout: 'login'
-}
+  layout: "login",
+};
 </script>
 
 <style lang="scss">
-  @import '@/assets/styles/index.scss';
+@import "@/assets/styles/index.scss";
 </style>

@@ -4,14 +4,14 @@
       <div class="imageWrap">
         <img src="http://dev.annowiz.com:18080/intro.10802bc0.svg" alt="" />
       </div>
-        <el-form
-          ref="loginForm"
-          :model="loginForm"
-          :rules="loginRules"
-          class="loginForm"
-          autocomplete="on"
-          label-position="left"
-          >
+      <el-form
+        ref="loginForm"
+        :model="loginForm"
+        :rules="loginRules"
+        class="loginForm"
+        autocomplete="on"
+        label-position="left"
+      >
         <div class="title-container">
           <h3 class="title">BackOffice Login</h3>
         </div>
@@ -26,7 +26,8 @@
                 name="username"
                 type="text"
                 tabindex="1"
-                autocomplete="on">
+                autocomplete="on"
+              >
                 <i slot="prefix" class="el-input__icon el-icon-user"></i>
               </el-input>
             </el-form-item>
@@ -105,11 +106,11 @@ export default {
       loading: false,
     };
   },
-  mounted() { },
+  mounted() {},
   methods: {
     checkCapslock(e) {
       const { key } = e;
-      this.capsTooltip = key && key.length === 1 && key >= 'A' && key <= 'Z';
+      this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
     },
     // 로그인 로직 처리 예정
     handleLogin() {
@@ -117,8 +118,8 @@ export default {
       // postLogin({ username, password });
 
       this.router.push({
-        name: 'project',
-        params: { path: '/project' },
+        name: "project",
+        params: { path: "/project" },
       });
       // this.$refs.loginForm.validate((valid) => {
       //   if (valid) {

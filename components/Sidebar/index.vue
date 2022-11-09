@@ -105,9 +105,6 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    variables() {
-      return variables;
-    },
     // isCollapse() {
     //   return false;
     // },
