@@ -177,7 +177,6 @@ export default {
       perPageNum: 10,
       totalCount: 0,
       sortValue: null,
-<<<<<<< HEAD
       criteria: {
         page: 1,
         perPageNum: 10,
@@ -185,12 +184,8 @@ export default {
         // keyword: '',
         // cntntsTyCodeSn: this.cntntsTyCodeSn
       },
-=======
-
       startDate: "",
       endDate: "",
-
->>>>>>> 00d3d7c06ceec8772c8211487352327aa7de913d
       // tableList Date Select
       dateOptions: [
         {
