@@ -104,7 +104,9 @@ export default {
       loading: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.$refs.username.focus();
+  },
   methods: {
     checkCapsLock(e) {
       this.isCapsLock = e.getModifierState('CapsLock');
