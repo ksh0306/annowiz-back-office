@@ -49,10 +49,7 @@
             </div>
             <div>
               <el-form-item label="색상 선택">
-                <el-color-picker
-                  v-model="colorPicker"
-                  class="commonColorPicker"
-                ></el-color-picker>
+                <Compact v-model="colors" @input="onChange"></Compact>
               </el-form-item>
             </div>
             <div>
@@ -98,11 +95,18 @@
 </template>
 
 <script>
+import { Compact } from "vue-color";
+
 export default {
   name: "ProjectCreate",
+  components: {
+    Compact,
+  },
   data() {
     return {
       horizontalItems: "top",
+      colors: {},
+
       formInline: {
         userId: "",
         title: "",
@@ -154,6 +158,10 @@ export default {
     // 이전 페이지 이동
     goBack() {
       this.$router.go(-1);
+    },
+    onChange(val) {
+      this.colors = val;
+      console.log(val);
     },
   },
 };
