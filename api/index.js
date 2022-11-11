@@ -29,10 +29,27 @@ function createCartItem(cartItem) {
   return instance.post("/carts", cartItem);
 } // createCartItem()
 
+async function postLogin({ username, password }) {
+  const url = 'http://dev.annowiz.com:18081/login';
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username, password
+    })
+  });
+  const { accessToken } = await response.json();
+
+  return accessToken;
+}
+
 export {
   fetchProductById,
   fetchProductsBykeyword,
   fetchCartItems,
   createCartItem,
   fetchTableDataItems,
+  postLogin,
 };
