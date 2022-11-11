@@ -81,22 +81,23 @@
 
 export default {
   data() {
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error("패스워드6자리이상"));
-      } else {
-        callback();
-      }
+    const validateInput = (rule, value, callback) => {
+      const { field } = rule;
+
+      value.length
+        ? callback()
+        : callback(`${field} 항목을 입력해 주세요.`);
     };
+
     return {
       loginForm: {
         username: "",
         password: "",
       },
       loginRules: {
-        username: [{ required: true, trigger: "blur" }],
+        username: [{ required: true, trigger: "blur", validator: validateInput }],
         password: [
-          { required: true, trigger: "blur", validator: validatePassword },
+          { required: true, trigger: "blur", validator: validateInput },
         ],
       },
       isPasswordHidden: true,
@@ -125,6 +126,7 @@ export default {
         name: "project",
         params: { path: "/project" },
       });
+
       // this.$refs.loginForm.validate((valid) => {
       //   if (valid) {
       //     // this.loading = true
