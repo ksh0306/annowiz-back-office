@@ -2,7 +2,12 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000",
-}); // instance 끝
+});
+
+const userService = axios.create({
+  baseURL: 'http://dev.annowiz.com:18081',
+  headers: { 'Content-Type': 'application/json' },
+})
 
 function fetchProductById(id) {
   return instance.get(`/products/${id}`);
@@ -29,20 +34,13 @@ function createCartItem(cartItem) {
   return instance.post("/carts", cartItem);
 } // createCartItem()
 
-async function postLogin({ username, password }) {
-  const url = 'http://dev.annowiz.com:18081/login';
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username, password
-    })
-  });
-  const { accessToken } = await response.json();
-
-  return accessToken;
+function postLogin(userData) {
+  return userService.post('/login', userData)
+    .catch((error) => {
+      if (error.response) {
+        return error.response.data;
+      }
+    });
 }
 
 export {
