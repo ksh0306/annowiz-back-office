@@ -1,5 +1,4 @@
 import { postLogin } from '@/api';
-import { Notification } from 'element-ui';
 
 export const state = () => ({});
 
@@ -27,14 +26,6 @@ export const actions = {
 
       return;
     }
-
-    const { code, message } = result;
-    
-    Notification({
-      title: code,
-      message: message,
-      duration: 3000,
-    });
   },
 };
 
