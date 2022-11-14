@@ -107,7 +107,8 @@
 }
 .el-popover > div{
     display:flex; 
-    flex-direction:column
+    flex-direction:column;
+    width: 180px;
 }
 
 .popTitle {
