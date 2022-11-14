@@ -16,11 +16,16 @@ export const mutations = {
 export const actions = {
   async login({ commit }, data) {
     const { username, password } = data;
-    const accessToken = await postLogin({ username, password });
+    const response = await postLogin({ username, password });
+    const { data: responseData, result } = response;
 
-    commit('SET_ACCESS_TOKEN', accessToken);
+    if (responseData) {
+      commit('SET_ACCESS_TOKEN', responseData.accessToken);
 
-    this.app.router.push('/projects');
+      this.app.router.push('/projects');
+
+      return;
+    }
   },
 };
 
