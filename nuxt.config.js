@@ -58,6 +58,7 @@ export default {
     ["@nuxtjs/dotenv", { filename: ".env" }],
     "nuxt-vuex-localstorage",
     "cookie-universal-nuxt",
+    "@nuxtjs/axios",
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -78,7 +79,9 @@ export default {
     },
     postcss: null,
   },
+
   axios: {
+    proxy: true,
     retry: {
       // 최대 재전송 횟수 4회
       retries: 4,
@@ -104,8 +107,11 @@ export default {
   },
   proxy: {
     "/api": {
+      target: "http://dev.annowiz.com:18081",
       secure: false,
       changeOrigin: true,
+      pathRewrite: { "^/api/": "" },
+      // rewrite: (path) => path.replace(/^\/api/, ""),
     },
   },
 };
