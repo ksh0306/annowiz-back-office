@@ -48,9 +48,8 @@
               </el-form-item>
             </div>
             <div>
-              <el-form-item label="색상 선택">
-                <Compact v-model="colors" @input="onChange"></Compact>
-              </el-form-item>
+              <ColorPicker/>
+
             </div>
             <div>
               <el-form-item label="라인 선택">
@@ -95,17 +94,17 @@
 </template>
 
 <script>
-import { Compact } from "vue-color";
+import ColorPicker from "@/components/Base/ColorPicker";
 
 export default {
   name: "ProjectCreate",
   components: {
-    Compact,
+    ColorPicker
   },
   data() {
     return {
       horizontalItems: "top",
-      colors: {},
+
 
       formInline: {
         userId: "",
