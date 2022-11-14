@@ -10,7 +10,7 @@
                 <div style="">
                     <div class="popTitle">
                         <span>Select Color</span>
-                        <span class="svg-container" @click="visible = false">
+                        <span class="svg-container" @click="closeColorPalette">
                             <svg-icon icon-class="x-close" />
                         </span>
                     </div>
@@ -18,11 +18,17 @@
                       :palette="paletteColors"    
                      ></Compact>
                     <div class="buttonWrap">
-                        <el-button type="secondary" class="commonButton" @click="visible = false">Cancel</el-button>
-                        <el-button type="primary" class="commonButton" @click="visible = false">Save</el-button>
+                        <el-button type="secondary" class="commonButton" @click="closeColorPalette">Cancel</el-button>
+                        <el-button type="primary" class="commonButton" @click="saveColors">Save</el-button>
                     </div>
                 </div>
-                <el-button slot="reference"><span></span>{{colors.hex}}</el-button>
+                <el-button slot="reference">
+                    <span :style="{background : selectedColors.hex}"></span>
+                    <span>{{selectedColors.hex}}</span>
+                    <span class="svg-container">
+                        <svg-icon icon-class="eye-dropper" />
+                    </span>
+                </el-button>
             </el-popover>
 
         </el-form-item>
@@ -48,16 +54,21 @@
                     hsv:{h:0,s:0.551219512195122,v:0.803921568627451,a:1},
                     a:1
                 }, 
-                paletteColors :[ '#CD5C5C','#F97316','#FAAD14','#50C878','#2DD4BF','#3B82F6','#8B5CF6','#EC4899','#D946EF','#DEB887','#84CC16','#0EA5E9']
+                paletteColors :[ '#CD5C5C','#F97316','#FAAD14','#50C878','#2DD4BF','#3B82F6','#8B5CF6','#EC4899','#D946EF','#DEB887','#84CC16','#0EA5E9'],
+                selectedColors:{}, 
             }
         },
+        mounted(){
+            this.selectedColors = this.colors;
+        },
         methods:{
-            saveColors(event){
-               console.log(this.colors, JSON.stringify(this.colors));
-                            
+            saveColors(){
+               this.selectedColors= this.colors
+               this.visible = false            
             },
             closeColorPalette(){
-
+               this.colors= this.selectedColors
+               this.visible = false            
             }
         }
     }
@@ -66,6 +77,32 @@
 
 
 <style lang="scss" scoped>
+.el-button::v-deep{
+    width: 180px;
+    padding: 0px 20px;
+    height: 40px;
+    line-height: 40px;
+     > span{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        > span{    
+          &:nth-child(1){
+              width:24px; 
+              height:24px; 
+              border-radius:4px;
+          }
+          &:nth-child(2){
+            margin-right: 20px;
+            
+          }
+          .svg-container{
+            font-size: 18px;
+          }
+        }
+
+     }
+}
 .el-popover > div{
     display:flex; 
     flex-direction:column
