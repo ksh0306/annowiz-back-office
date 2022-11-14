@@ -71,9 +71,7 @@
                     </el-form-item>
                   </div>
                   <div class="el-col-item">
-                    <el-form-item label="색상 선택">
-                      <ColorPicker @setColors="updateColors" />
-                    </el-form-item>
+                    <el-form-item label="색상 선택"> </el-form-item>
                   </div>
                   <div class="el-col-item">
                     <el-form-item label="라인 선택">
@@ -308,13 +306,8 @@
 </template>
 
 <script>
-import ColorPicker from "@/components/Base/ColorPicker";
-
 export default {
   name: "ProjectCreate",
-  components: {
-    ColorPicker,
-  },
   data() {
     return {
       // el-form horizon
@@ -402,10 +395,6 @@ export default {
     // 이전 페이지 이동
     goBack() {
       this.$router.go(-1);
-    },
-    updateColors(colorsValue) {
-      this.colorPicker = colorsValue;
-      console.log("colors", this.colorPicker);
     },
   },
 };
