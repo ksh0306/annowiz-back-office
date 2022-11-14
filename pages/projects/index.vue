@@ -67,11 +67,7 @@
                   class="commonButton"
                   >검색</el-button
                 >
-                <el-button
-                  native-type="button"
-                  type="text"
-                  class="commonButton"
-                >
+                <el-button type="text" class="commonButton">
                   <span class="svg-container">
                     <svg-icon icon-class="refresh" />
                   </span>
