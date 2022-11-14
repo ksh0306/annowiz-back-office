@@ -77,26 +77,25 @@
 </template>
 
 <script>
-// import { postLogin } from '@/middleware/api';
-
 export default {
   data() {
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error("패스워드6자리이상"));
-      } else {
-        callback();
-      }
+    const validateInput = (rule, value, callback) => {
+      const { field } = rule;
+
+      value.length
+        ? callback()
+        : callback(`${field} 항목을 입력해 주세요.`);
     };
+
     return {
       loginForm: {
         username: "",
         password: "",
       },
       loginRules: {
-        username: [{ required: true, trigger: "blur" }],
+        username: [{ required: true, trigger: "blur", validator: validateInput }],
         password: [
-          { required: true, trigger: "blur", validator: validatePassword },
+          { required: true, trigger: "blur", validator: validateInput },
         ],
       },
       isPasswordHidden: true,
@@ -104,7 +103,9 @@ export default {
       loading: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.$refs.username.focus();
+  },
   methods: {
     checkCapsLock(e) {
       this.isCapsLock = e.getModifierState('CapsLock');
@@ -118,27 +119,16 @@ export default {
     },
     // 로그인 로직 처리 예정
     handleLogin() {
-      const { username, password } = this;
-      // postLogin({ username, password });
+      this.$refs.loginForm.validate((valid) => {
+        if (!valid) {
+          console.log('login fields are invalid.');
+          return false;
+        }
 
-      this.router.push({
-        name: "project",
-        params: { path: "/project" },
+        this.loading = true;
+        this.$store.dispatch('login/login', this.loginForm);
+        this.loading = false;
       });
-      // this.$refs.loginForm.validate((valid) => {
-      //   if (valid) {
-      //     // this.loading = true
-      //     // this.$store.dispatch('login/doLogin', this.loginForm)
-      //     // this.loading = false
-      //   } else {
-      //     // this.router.push({
-      //     //   name: "dashboard",
-      //     //   params: { path: "/dashboard" },
-      //     // });
-      //     console.log("error submit!!");
-      //     return false;
-      //   }
-      // });
     },
   },
 };
