@@ -48,8 +48,7 @@
               </el-form-item>
             </div>
             <div>
-              <ColorPicker/>
-
+              <ColorPicker @setColors="updateColors"/>
             </div>
             <div>
               <el-form-item label="라인 선택">
@@ -158,10 +157,10 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    onChange(val) {
-      this.colors = val;
-      console.log(val);
-    },
+    updateColors(colorsValue){
+      this.colorPicker = colorsValue
+      console.log('colors', this.colorPicker);
+    }
   },
 };
 </script>

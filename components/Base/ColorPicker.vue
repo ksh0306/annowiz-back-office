@@ -10,7 +10,7 @@
                 <div style="">
                     <div class="popTitle">
                         <span>Select Color</span>
-                        <span class="svg-container" @click="closeColorPalette">
+                        <span class="svg-container" @click="saveColors(false)">
                             <svg-icon icon-class="x-close" />
                         </span>
                     </div>
@@ -18,8 +18,8 @@
                       :palette="paletteColors"    
                      ></Compact>
                     <div class="buttonWrap">
-                        <el-button type="secondary" class="commonButton" @click="closeColorPalette">Cancel</el-button>
-                        <el-button type="primary" class="commonButton" @click="saveColors">Save</el-button>
+                        <el-button type="secondary" class="commonButton" @click="saveColors(false)">Cancel</el-button>
+                        <el-button type="primary" class="commonButton" @click="saveColors(true)">Save</el-button>
                     </div>
                 </div>
                 <el-button slot="reference">
@@ -62,14 +62,13 @@
             this.selectedColors = this.colors;
         },
         methods:{
-            saveColors(){
-               this.selectedColors= this.colors
-               this.visible = false            
+            saveColors(isSave){
+               this.visible = false;
+               if(isSave) this.selectedColors = this.colors;
+               else this.colors = this.selectedColors;
+               this.$emit('setColors', this.selectedColors)            
             },
-            closeColorPalette(){
-               this.colors= this.selectedColors
-               this.visible = false            
-            }
+
         }
     }
 </script>
@@ -86,16 +85,19 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        > span{    
+        > span{
+         //버튼 색상 표시    
           &:nth-child(1){
               width:24px; 
               height:24px; 
               border-radius:4px;
           }
+          //버튼 색상 hex표시
           &:nth-child(2){
             margin-right: 20px;
             
           }
+          //버튼 내 아이콘 
           .svg-container{
             font-size: 18px;
           }
