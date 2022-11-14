@@ -7,10 +7,13 @@ const instance = axios.create({
 
 const userService = axios.create({
   baseURL: 'http://dev.annowiz.com:18081',
-  headers: { 'Content-Type': 'application/json' },
-})
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  },
+});
 
-userService.interceptors.response.use(function (response) {
+userService.interceptors.response.use((response) => {
   return response;
 }, (error) => {
   if (error.response) {
