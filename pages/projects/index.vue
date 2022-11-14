@@ -169,6 +169,7 @@ import axios from "axios";
 const API = {
   RESULT_TABLEDATA_LIST: "http://localhost:3000/tableData",
 };
+
 export default {
   name: "ProjectList",
   data() {

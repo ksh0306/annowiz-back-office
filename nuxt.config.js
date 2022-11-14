@@ -10,13 +10,19 @@ export default {
   head: {
     title: "annowiz-back-office",
     htmlAttrs: {
-      lang: "en",
+      lang: "ko",
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
+      {
+        "http-equiv": "Cache-Control",
+        content: "no-cache, no-store, must-revalidate",
+      },
+      { "http-equiv": "Expires", content: "0" },
+      { "http-equiv": "Pragma", content: "no-cache" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     link: [
@@ -111,7 +117,6 @@ export default {
       secure: false,
       changeOrigin: true,
       pathRewrite: { "^/api/": "" },
-      // rewrite: (path) => path.replace(/^\/api/, ""),
     },
   },
 };
