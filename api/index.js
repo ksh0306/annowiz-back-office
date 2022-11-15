@@ -6,26 +6,26 @@ const instance = axios.create({
 });
 
 const userService = axios.create({
-  baseURL: "/api",
-  headers: { "Content-Type": "application/json" },
+  baseURL: '/api',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  },
 });
 
-userService.interceptors.response.use(
-  function (response) {
-    return response;
-  },
-  (error) => {
-    if (error.response) {
-      const { code, message } = error.response.data.result;
+userService.interceptors.response.use((response) => {
+  return response;
+}, (error) => {
+  if (error.response) {
+    const { code, message } = error.response.data.result;
 
-      Notification({
-        title: code,
-        message: message,
-        duration: 3000,
-      });
-    }
-    return Promise.reject(error);
+    Notification({
+      title: code,
+      message: message,
+      duration: 3000,
+    });
   }
+  return Promise.reject(error);
 );
 
 function fetchProductById(id) {
