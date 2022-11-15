@@ -24,7 +24,7 @@
               <NuxtLink to="/sample">회원 조회</NuxtLink>
             </el-menu-item>
             <el-menu-item index="1-2">
-              <NuxtLink to="/Project/ProjectList">회원 등록</NuxtLink>
+              <NuxtLink to="/Projects">회원 등록</NuxtLink>
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
@@ -38,7 +38,7 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="2-1">
-              <NuxtLink to="/Project/ProjectList">프로젝트 조회</NuxtLink>
+              <NuxtLink to="/Projects">프로젝트 조회</NuxtLink>
             </el-menu-item>
             <el-menu-item index="2-2">
               <NuxtLink to="/sample">프로젝트 등록</NuxtLink>
@@ -55,7 +55,7 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="3-1">
-              <NuxtLink to="/Project/ProjectList">태스크 조회</NuxtLink>
+              <NuxtLink to="/Projects">태스크 조회</NuxtLink>
             </el-menu-item>
             <el-menu-item index="3-2">
               <NuxtLink to="/sample">태스크 등록</NuxtLink>
@@ -72,7 +72,7 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="4-1">
-              <NuxtLink to="/Project/ProjectList">잡 조회</NuxtLink>
+              <NuxtLink to="/Projects">잡 조회</NuxtLink>
             </el-menu-item>
             <el-menu-item index="4-2">
               <NuxtLink to="/sample">잡 등록</NuxtLink>

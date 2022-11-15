@@ -10,13 +10,19 @@ export default {
   head: {
     title: "annowiz-back-office",
     htmlAttrs: {
-      lang: "en",
+      lang: "ko",
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
+      {
+        "http-equiv": "Cache-Control",
+        content: "no-cache, no-store, must-revalidate",
+      },
+      { "http-equiv": "Expires", content: "0" },
+      { "http-equiv": "Pragma", content: "no-cache" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     link: [
@@ -58,6 +64,7 @@ export default {
     ["@nuxtjs/dotenv", { filename: ".env" }],
     "nuxt-vuex-localstorage",
     "cookie-universal-nuxt",
+    "@nuxtjs/axios",
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -78,7 +85,9 @@ export default {
     },
     postcss: null,
   },
+
   axios: {
+    proxy: true,
     retry: {
       // 최대 재전송 횟수 4회
       retries: 4,
@@ -100,5 +109,14 @@ export default {
   },
   server: {
     port: 4000,
+    host: "0.0.0.0",
+  },
+  proxy: {
+    "/api": {
+      target: "http://dev.annowiz.com:18081",
+      secure: false,
+      changeOrigin: true,
+      pathRewrite: { "^/api/": "" },
+    },
   },
 };
